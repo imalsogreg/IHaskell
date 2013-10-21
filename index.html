@@ -4,11 +4,11 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Ihaskell : A Haskell kernel for IPython." />
+    <meta name="description" content="IHaskell: Haskell for IPython : A Haskell language backend for IPython interactive shell and notebook." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Ihaskell</title>
+    <title>IHaskell: Haskell for IPython</title>
   </head>
 
   <body>
@@ -18,8 +18,8 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/gibiansky/IHaskell">View on GitHub</a>
 
-          <h1 id="project_title">Ihaskell</h1>
-          <h2 id="project_tagline">A Haskell kernel for IPython.</h2>
+          <h1 id="project_title">IHaskell: Haskell for IPython</h1>
+          <h2 id="project_tagline">A Haskell language backend for IPython interactive shell and notebook.</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/gibiansky/IHaskell/zipball/master">Download this project as a .zip file</a>
@@ -31,22 +31,73 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <p>IHaskell is an implementation of the <a href="http://ipython.org">IPython</a> kernel protocol which allows you to use Haskell inside IPython frontends such as <code>qtconsole</code> and <code>notebook</code>.</p>
 
-<p>bloop</p>
+<p>The project works with the IPython shell:</p>
+
+<p><img src="https://raw.github.com/gibiansky/IHaskell/master/images/ihaskell-console.png" alt="IPython Console"></p>
+
+<p>As well as the IPython browser-based notebook interface:</p>
+
+<p><img src="https://raw.github.com/gibiansky/IHaskell/master/images/ihaskell-notebook.png" alt="IPython Notebook"></p>
+
+<h1>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>Download the package from the Github repository:</p>
+
+<div class="highlight highlight-bash"><pre>git clone https://github.com/gibiansky/IHaskell
+</pre></div>
+
+<p>Install ZeroMQ:</p>
+
+<div class="highlight highlight-bash"><pre>sudo apt-get install libzmq-dev <span class="c"># Ubuntu</span>
+brew install zeromq <span class="c"># Macs with Homebrew</span>
+</pre></div>
+
+<p>Install the package:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nb">cd </span>IHaskell;
+cabal install --only-dependencies;
+cabal configure;
+cabal build;
+cabal install;
+</pre></div>
+
+<p>Create the IPython profile:</p>
+
+<div class="highlight highlight-bash"><pre>IHaskell setup
+</pre></div>
+
+<p>Run the notebook or console interface:</p>
+
+<div class="highlight highlight-bash"><pre>IHaskell run notebook <span class="c"># Should open a browser window!</span>
+IHaskell run console
+</pre></div>
+
+<p>There is a test notebook in the <code>IHaskell</code> directory.</p>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Ihaskell maintained by <a href="https://github.com/gibiansky">gibiansky</a></p>
+        <p class="copyright">IHaskell: Haskell for IPython maintained by <a href="https://github.com/gibiansky">gibiansky</a></p>
         <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40714888-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
 
   </body>
 </html>
