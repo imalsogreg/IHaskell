@@ -71,11 +71,32 @@ cabal install;
 
 <p>Run the notebook or console interface:</p>
 
-<div class="highlight highlight-bash"><pre>IHaskell run notebook <span class="c"># Should open a browser window!</span>
-IHaskell run console
+<div class="highlight highlight-bash"><pre>IHaskell notebook <span class="c"># Should open a browser window!</span>
+IHaskell console
 </pre></div>
 
 <p>There is a test notebook in the <code>IHaskell</code> directory.</p>
+
+<h1>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p>IHaskell is an extremely young project, and I'd love your help getting it to a stable and useful point. There's a lot to do, and if you'd like to contribute, feel free to get in touch with me via my email at andrew period gibiansky at gmail - although browsing the code should be enough to get you started, I'm more than happy to answer any questions myself.</p>
+
+<p>Some ideas for improvements:</p>
+
+<ul>
+<li>Type annotations. When a statement is evaluated, the GHC API returns the names of all bound variables. It should be possible to take those names and find the types of the variables, and display them in a table via the <code>display_data</code> message. </li>
+<li>Implementing useful directives. Currently, support for GHCi-style ":"-initiated directives exist, but they do not do anything (and are instead just printed in green). Useful directives such as ":t" and ":i" and ":m [+-]" have yet to be implemented, and adding them would be a good way to get started with the codebase.</li>
+<li>Parsing and viewing of formats via <code>display_data</code> and HTML:
+
+<ul>
+<li>
+<code>aeson</code> compatibility which displays JSON as syntax highlighted JSON code via HTML.</li>
+<li>Support for <code>repa</code> or <code>hmatrix</code> vectors and matrices being displayed.</li>
+<li>`A custom typeclass for displaying data types as HTML, similar to Show.</li>
+</ul>
+</li>
+</ul>
       </section>
     </div>
 
