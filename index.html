@@ -51,16 +51,15 @@
 
 <p>Install ZeroMQ:</p>
 
-<div class="highlight highlight-bash"><pre>sudo apt-get install libzmq1 <span class="c"># Ubuntu</span>
+<div class="highlight highlight-bash"><pre>sudo apt-get install libzmq3-dev <span class="c"># Ubuntu (Saucy only)</span>
 brew install zeromq <span class="c"># Macs with Homebrew</span>
 </pre></div>
+
+<p>(For older versions of Ubuntu, you should be able to download the ZeroMQ3 source and install without much difficulty.)</p>
 
 <p>Install the package:</p>
 
 <div class="highlight highlight-bash"><pre><span class="nb">cd </span>IHaskell;
-cabal install --only-dependencies;
-cabal configure;
-cabal build;
 cabal install;
 </pre></div>
 
@@ -96,9 +95,36 @@ IHaskell console
 <li>`A custom typeclass for displaying data types as HTML, similar to Show.</li>
 </ul>
 </li>
-</ul><p>Also, take a look at the <a href="https://github.com/gibiansky/IHaskell/blob/master/README.md#developer-notes">developer notes</a> as well - they are sparse but may be helpful. </p>
+</ul><p>Take a look at the <a href="https://github.com/gibiansky/IHaskell/blob/master/README.md#developer-notes">developer notes</a> as well - they are sparse but may be helpful.</p>
 
-<p>Haddock documentation is <a href="http://gibiansky.github.io/IHaskell/IHaskell/">also available</a>.</p>
+<h1>
+<a name="developer-notes" class="anchor" href="#developer-notes"><span class="octicon octicon-link"></span></a>Developer Notes</h1>
+
+<p>Before diving in, you should read the <a href="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/">brief description of IPython kernel architectures</a>
+and read the <a href="http://ipython.org/ipython-doc/dev/development/messaging.html">complete messaging protocol specification</a>.</p>
+
+<p>Skim the rather-lacking <a href="http://gibiansky.github.io/IHaskell/IHaskell/">Haddock documentation</a>.</p>
+
+<p>Module Quickstart: </p>
+
+<ul>
+<li>
+<code>Main</code>: Argument parsing and basic messaging loop, using Haskell Chans to communicate with the ZeroMQ sockets.</li>
+<li>
+<code>IHaskell.Types</code>: All message type definitions.</li>
+<li>
+<code>IHaskell.Eval.Evaluate</code>: Wrapper around GHC API, exposing a single <code>evaluate</code> interface that runs a statement, declaration, import, or directive.</li>
+<li>
+<code>IHaskell.IPython</code>: Shell scripting wrapper using <code>Shelly</code> for the <code>notebook</code>, <code>setup</code>, and <code>console</code> commands.</li>
+<li>
+<code>IHaskell.Message.Parser</code>: Parsing messages received from IPython.</li>
+<li>
+<code>IHaskell.Message.UUID</code>: UUID generator and data structure.</li>
+<li>
+<code>IHaskell.Message.Writer</code>: <code>ToJSON</code> for Messages.</li>
+<li>
+<code>IHaskell.ZeroMQ</code>: Low-level ZeroMQ communication wrapper. <code>serveProfile</code> starts listening on all necessary sockets, and returns a <code>ZeroMQInterface</code> record. This record exposes reading and writing <code>Chan Message</code> messages for all the necessary sockets, so then the rest of the application can simply use that interface.</li>
+</ul>
       </section>
     </div>
 
