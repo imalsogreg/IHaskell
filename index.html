@@ -31,7 +31,10 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>IHaskell is an implementation of the <a href="http://ipython.org">IPython</a> kernel protocol which allows you to use Haskell inside IPython frontends such as <code>qtconsole</code> and <code>notebook</code>.</p>
+        <h1>
+<a name="ihaskell" class="anchor" href="#ihaskell"><span class="octicon octicon-link"></span></a>IHaskell</h1>
+
+<p>IHaskell is an implementation of the <a href="http://ipython.org">IPython</a> kernel protocol which allows you to use Haskell inside IPython frontends such as <code>qtconsole</code> and <code>notebook</code>.</p>
 
 <p>The project works with the IPython shell:</p>
 
@@ -43,6 +46,11 @@
 
 <h1>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>Make sure you have IPython version 1.0 or higher. IHaskell will not work with older versions of IPython.</p>
+
+<div class="highlight highlight-bash"><pre>ipython --version <span class="c"># Should print 1.0.0 (or higher!)</span>
+</pre></div>
 
 <p>Download the package from the Github repository:</p>
 
@@ -56,6 +64,11 @@ brew install zeromq <span class="c"># Macs with Homebrew</span>
 </pre></div>
 
 <p>(For older versions of Ubuntu, you should be able to download the ZeroMQ3 source and install without much difficulty.)</p>
+
+<p>Install Happy:</p>
+
+<div class="highlight highlight-bash"><pre>sudo apt-get install happy <span class="c"># Ubuntu</span>
+</pre></div>
 
 <p>Install the package:</p>
 
