@@ -57,6 +57,21 @@
 <div class="highlight highlight-bash"><pre>ipython --version     <span class="c"># Should print 1.0.0 (or higher!)</span>
 </pre></div>
 
+<p>Even newer versions tend to work better. Note that at the moment Ubuntu does not have newer IPython in it's repositories. </p>
+
+<p>If you'd like to install it the most modern IPython from Github, run the following commands:</p>
+
+<div class="highlight highlight-bash"><pre>git clone git@github.com:ipython/ipython.git
+<span class="nb">cd </span>ipython
+sudo python setup.py install
+</pre></div>
+
+<p>You will need to install several libraries for the notebook and console interfaces to work:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># If you don't have pip on Mac OS X, you probably can run "sudo easy_install pip"</span>
+sudo pip install pyzmq tornado jinja2
+</pre></div>
+
 <h2>
 <a name="haskell-and-cabal" class="anchor" href="#haskell-and-cabal"><span class="octicon octicon-link"></span></a>Haskell and Cabal</h2>
 
@@ -65,6 +80,8 @@
 <div class="highlight highlight-bash"><pre>ghc --numeric-version <span class="c"># Should be 7.6.3</span>
 cabal --version       <span class="c"># Should be 1.18.*</span>
 </pre></div>
+
+<p>Since IHaskell uses the GHC API for evaluation and parsing, other versions of GHC may not work.</p>
 
 <p>If you do not have GHC or Cabal, you should be able to install both via the 
 <a href="http://www.haskell.org/platform/">Haskell Platform</a>. On Macs with Homebrew, you can do this via</p>
@@ -78,7 +95,11 @@ cabal update <span class="o">&amp;&amp;</span> cabal install cabal-install
 
 <p>Also, in order to use executables which <code>cabal</code> installs, they must be in your path. Execute this in your shell or add it to your <code>~/.bashrc</code>:</p>
 
-<div class="highlight highlight-bash"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.cabal/bin:<span class="nv">$PATH</span>
+<div class="highlight highlight-bash"><pre><span class="c"># If you have a ~/.cabal/bin folder:</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.cabal/bin:<span class="nv">$PATH</span>
+
+<span class="c"># If you have a ~/Library/Haskell/bin folder on OS X:</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/Library/Haskell/bin:<span class="nv">$PATH</span>
 </pre></div>
 
 <h2>
@@ -91,11 +112,14 @@ Note that there are different instructions for different platforms:</p>
 sudo apt-get install libzmq3-dev
 
 <span class="c"># For Macs with Homebrew:</span>
+<span class="c"># Make sure you're not in a git repository while doing this!</span>
+brew unlink zeromq <span class="c"># If you happen to have ZeroMQ already installed...</span>
+git checkout c356bf7 <span class="sb">`</span>brew --prefix<span class="sb">`</span>/Library/Formula/zeromq.rb
 brew install zeromq
-brew switch zeromq 3.2.4
 
 <span class="c"># Compiling from source:</span>
 git clone git@github.com:zeromq/zeromq3-x.git libzmq
+<span class="nb">cd </span>libzmq
 ./autogen.sh <span class="o">&amp;&amp;</span> ./configure <span class="o">&amp;&amp;</span> make
 sudo make install
 sudo ldconfig
@@ -104,7 +128,7 @@ sudo ldconfig
 <h2>
 <a name="compilation-tools" class="anchor" href="#compilation-tools"><span class="octicon octicon-link"></span></a>Compilation Tools</h2>
 
-<p>Install the <code>happy</code></p>
+<p>Install the <code>happy</code> parser generator tool and <code>cpphs</code> preprocessor:</p>
 
 <div class="highlight highlight-bash"><pre>cabal install happy
 cabal install cpphs
@@ -113,12 +137,7 @@ cabal install cpphs
 <h2>
 <a name="ihaskell-installation" class="anchor" href="#ihaskell-installation"><span class="octicon octicon-link"></span></a>IHaskell Installation</h2>
 
-<p>Install the package from Hackage:</p>
-
-<div class="highlight highlight-bash"><pre>cabal install ihaskell
-</pre></div>
-
-<p><strong>Alternatively</strong>, for the most recent version, you can install package from the Github repository and compile it from there:</p>
+<p>Install the IHaskell package from the Github repository:</p>
 
 <div class="highlight highlight-bash"><pre>git clone https://github.com/gibiansky/IHaskell
 <span class="nb">cd </span>IHaskell
