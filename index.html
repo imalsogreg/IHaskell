@@ -50,26 +50,26 @@
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
 
 <h2>
-<a name="ipython" class="anchor" href="#ipython"><span class="octicon octicon-link"></span></a>IPython</h2>
+<a name="zeromq" class="anchor" href="#zeromq"><span class="octicon octicon-link"></span></a>ZeroMQ</h2>
 
-<p>Make sure you have <a href="http://ipython.org/">IPython</a> version 1.0 or higher. IHaskell will not work with older versions of IPython.</p>
+<p>IHaskell uses a library known as ZeroMQ for asynchronous communication. Make sure that ZeroMQ 3 is installed. Eventually IHaskell will be ported to ZeroMQ 4, but for now it is on version 3.
+Note that there are different instructions for different platforms:</p>
 
-<div class="highlight highlight-bash"><pre>ipython --version     <span class="c"># Should print 1.0.0 (or higher!)</span>
-</pre></div>
+<div class="highlight highlight-bash"><pre><span class="c"># For Ubuntu (Saucy):</span>
+sudo apt-get install libzmq3-dev
 
-<p>Even newer versions tend to work better. Note that at the moment Ubuntu does not have newer IPython in it's repositories. </p>
+<span class="c"># For Macs with Homebrew:</span>
+<span class="c"># Make sure you're not in a git repository while doing this!</span>
+brew unlink zeromq <span class="c"># If you happen to have ZeroMQ already installed...</span>
+git checkout c356bf7 <span class="sb">`</span>brew --prefix<span class="sb">`</span>/Library/Formula/zeromq.rb
+brew install zeromq
 
-<p>If you'd like to install it the most modern IPython from Github, run the following commands:</p>
-
-<div class="highlight highlight-bash"><pre>git clone git@github.com:ipython/ipython.git
-<span class="nb">cd </span>ipython
-sudo python setup.py install
-</pre></div>
-
-<p>You will need to install several libraries for the notebook and console interfaces to work:</p>
-
-<div class="highlight highlight-bash"><pre><span class="c"># If you don't have pip on Mac OS X, you probably can run "sudo easy_install pip"</span>
-sudo pip install pyzmq tornado jinja2
+<span class="c"># Compiling from source:</span>
+git clone git@github.com:zeromq/zeromq3-x.git libzmq
+<span class="nb">cd </span>libzmq
+./autogen.sh <span class="o">&amp;&amp;</span> ./configure <span class="o">&amp;&amp;</span> make
+sudo make install
+sudo ldconfig
 </pre></div>
 
 <h2>
@@ -103,29 +103,6 @@ cabal update <span class="o">&amp;&amp;</span> cabal install cabal-install
 </pre></div>
 
 <h2>
-<a name="zeromq" class="anchor" href="#zeromq"><span class="octicon octicon-link"></span></a>ZeroMQ</h2>
-
-<p>Make sure that ZeroMQ 3 is installed. Eventually IHaskell will be ported to ZeroMQ 4, but for now it is on version 3.
-Note that there are different instructions for different platforms:</p>
-
-<div class="highlight highlight-bash"><pre><span class="c"># For Ubuntu (Saucy):</span>
-sudo apt-get install libzmq3-dev
-
-<span class="c"># For Macs with Homebrew:</span>
-<span class="c"># Make sure you're not in a git repository while doing this!</span>
-brew unlink zeromq <span class="c"># If you happen to have ZeroMQ already installed...</span>
-git checkout c356bf7 <span class="sb">`</span>brew --prefix<span class="sb">`</span>/Library/Formula/zeromq.rb
-brew install zeromq
-
-<span class="c"># Compiling from source:</span>
-git clone git@github.com:zeromq/zeromq3-x.git libzmq
-<span class="nb">cd </span>libzmq
-./autogen.sh <span class="o">&amp;&amp;</span> ./configure <span class="o">&amp;&amp;</span> make
-sudo make install
-sudo ldconfig
-</pre></div>
-
-<h2>
 <a name="compilation-tools" class="anchor" href="#compilation-tools"><span class="octicon octicon-link"></span></a>Compilation Tools</h2>
 
 <p>Install the <code>happy</code> parser generator tool and <code>cpphs</code> preprocessor:</p>
@@ -137,11 +114,9 @@ cabal install cpphs
 <h2>
 <a name="ihaskell-installation" class="anchor" href="#ihaskell-installation"><span class="octicon octicon-link"></span></a>IHaskell Installation</h2>
 
-<p>Install the IHaskell package from the Github repository:</p>
+<p>Install the IHaskell package from Hackage:</p>
 
-<div class="highlight highlight-bash"><pre>git clone https://github.com/gibiansky/IHaskell
-<span class="nb">cd </span>IHaskell
-cabal install
+<div class="highlight highlight-bash"><pre>cabal install ihaskell
 </pre></div>
 
 <h2>
@@ -154,9 +129,6 @@ IHaskell console
 </pre></div>
 
 <p>There is a test notebook in the <code>IHaskell</code> directory.</p>
-
-<p><strong>Important Note:</strong> Using <code>IHaskell console</code> requires a proper patch to IPython. There is 
-<a href="https://github.com/ipython/ipython/pull/4678">a pull request</a> open on the IPython repository to fix this, but until it is merged, you need to install IPython from <a href="https://github.com/ivanov/ipython/tree/console-display-text">this branch</a>.</p>
 
 <p><strong>Note</strong>: You may have some trouble due to browser caches with the notebook interface if you also use IPython's notebook interface or have used it in the past. If something doesn't work or IPython says it can't connect to the notebook server, make sure to clear the browser cache in whatever browser you're using, or try another browser.</p>
 
