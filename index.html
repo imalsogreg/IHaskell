@@ -52,25 +52,26 @@
 <h2>
 <a name="zeromq" class="anchor" href="#zeromq"><span class="octicon octicon-link"></span></a>ZeroMQ</h2>
 
-<p>IHaskell uses a library known as ZeroMQ for asynchronous communication. Make sure that ZeroMQ 3 is installed. Eventually IHaskell will be ported to ZeroMQ 4, but for now it is on version 3.
-Note that there are different instructions for different platforms:</p>
+<p>IHaskell uses a library known as ZeroMQ for asynchronous communication. Make sure that ZeroMQ 4 is installed - it is a relatively recent library and thus you may have older versions installed.</p>
 
-<div class="highlight highlight-bash"><pre><span class="c"># For Ubuntu (Saucy):</span>
-sudo apt-get install libzmq3-dev
+<p>For Macs, you can easily install it with <a href="http://brew.sh/">Homebrew</a>:</p>
 
-<span class="c"># For Macs with Homebrew:</span>
-<span class="c"># Make sure you're not in a git repository while doing this!</span>
-brew unlink zeromq <span class="c"># If you happen to have ZeroMQ already installed...</span>
-git checkout c356bf7 <span class="sb">`</span>brew --prefix<span class="sb">`</span>/Library/Formula/zeromq.rb
+<div class="highlight highlight-bash"><pre><span class="c"># For Macs with Homebrew:</span>
+brew update
 brew install zeromq
+</pre></div>
 
-<span class="c"># Compiling from source:</span>
-git clone git@github.com:zeromq/zeromq3-x.git libzmq
+<p>On other platforms, you can easily install from source:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># Compiling from source:</span>
+git clone git@github.com:zeromq/zeromq4-x.git libzmq
 <span class="nb">cd </span>libzmq
 ./autogen.sh <span class="o">&amp;&amp;</span> ./configure <span class="o">&amp;&amp;</span> make
 sudo make install
 sudo ldconfig
 </pre></div>
+
+<p>If your own platform has a package and I haven't included instructions for it, feel free to send me an email or a PR on this README.</p>
 
 <h2>
 <a name="haskell-and-cabal" class="anchor" href="#haskell-and-cabal"><span class="octicon octicon-link"></span></a>Haskell and Cabal</h2>
@@ -128,7 +129,7 @@ cabal install cpphs
 IHaskell console
 </pre></div>
 
-<p>There is a test notebook in the <code>IHaskell</code> directory.</p>
+<p>There is a test notebook in the <code>IHaskell</code> directory. To try it, run IHaskell with <code>IHaskell notebook --serve=IHaskell</code>.</p>
 
 <p><strong>Note</strong>: You may have some trouble due to browser caches with the notebook interface if you also use IPython's notebook interface or have used it in the past. If something doesn't work or IPython says it can't connect to the notebook server, make sure to clear the browser cache in whatever browser you're using, or try another browser.</p>
 
