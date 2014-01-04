@@ -1,8 +1,227 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>ihaskell-0.2.0.5: A Haskell backend kernel for the IPython project.</title><link href="ocean.css" rel="stylesheet" type="text/css" title="Ocean" /><script src="haddock-util.js" type="text/javascript"></script><script type="text/javascript">//<![CDATA[
-window.onload = function () {pageLoad();};
-//]]>
-</script></head><body><div id="package-header"><ul class="links" id="page-menu"><li><a href="index.html">Contents</a></li><li><a href="doc-index.html">Index</a></li></ul><p class="caption">ihaskell-0.2.0.5: A Haskell backend kernel for the IPython project.</p></div><div id="content"><div id="description"><h1>ihaskell-0.2.0.5: A Haskell backend kernel for the IPython project.</h1><div class="doc"><p>IHaskell is a Haskell backend kernel for the IPython project. This allows using Haskell via
-a console or notebook interface. Additional packages may be installed to provide richer data visualizations.
-</p></div></div><div id="module-list"><p class="caption">Modules</p><ul><li><span id="control.n.1" class="module collapser" onclick="toggleSection('n.1')">IHaskell</span><ul id="section.n.1" class="show"><li><span class="module"><a href="IHaskell-Display.html">IHaskell.Display</a></span></li><li><span id="control.n.1.2" class="module collapser" onclick="toggleSection('n.1.2')">Message</span><ul id="section.n.1.2" class="show"><li><span class="module"><a href="IHaskell-Message-UUID.html">IHaskell.Message.UUID</a></span>UUID generator and data structure
-</li></ul></li><li><span class="module"><a href="IHaskell-Types.html">IHaskell.Types</a></span>All message type definitions.
-</li></ul></li><li><span class="module"><a href="Paths_ihaskell.html">Paths_ihaskell</a></span></li></ul></div></div><div id="footer"><p>Produced by <a href="http://www.haskell.org/haddock/">Haddock</a> version 2.13.2</p></div></body></html>
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="IHaskell: Haskell for IPython : A Haskell language backend for IPython interactive shell and notebook." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>IHaskell: Haskell for IPython</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/gibiansky/IHaskell">View on GitHub</a>
+
+          <h1 id="project_title">IHaskell: Haskell for IPython</h1>
+          <h2 id="project_tagline">A Haskell language backend for IPython interactive shell and notebook.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/gibiansky/IHaskell/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/gibiansky/IHaskell/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="https://raw.github.com/gibiansky/IHaskell/master/images/ihaskell-logo.png" alt="IHaskell"></p>
+
+<h1>
+<a name="ihaskell" class="anchor" href="#ihaskell"><span class="octicon octicon-link"></span></a>IHaskell</h1>
+
+<p>IHaskell is an implementation of the <a href="http://ipython.org">IPython</a> kernel protocol which allows you to use Haskell inside IPython frontends such as <code>qtconsole</code> and <code>notebook</code>.</p>
+
+<p>The project works with the IPython shell:</p>
+
+<p><img src="https://raw.github.com/gibiansky/IHaskell/master/images/ihaskell-console.png" alt="IPython Console"></p>
+
+<p>As well as the IPython browser-based notebook interface:</p>
+
+<p><img src="https://raw.github.com/gibiansky/IHaskell/master/images/ihaskell-notebook.png" alt="IPython Notebook"></p>
+
+<h1>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<h2>
+<a name="zeromq" class="anchor" href="#zeromq"><span class="octicon octicon-link"></span></a>ZeroMQ</h2>
+
+<p>IHaskell uses a library known as ZeroMQ for asynchronous communication. Make sure that ZeroMQ 4 is installed - it is a relatively recent library and thus you may have older versions installed.</p>
+
+<p>For Macs, you can easily install it with <a href="http://brew.sh/">Homebrew</a>:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># For Macs with Homebrew:</span>
+brew update
+brew install zeromq
+</pre></div>
+
+<p>On other platforms, you can easily install from source:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># Compiling from source:</span>
+git clone git@github.com:zeromq/zeromq4-x.git libzmq
+<span class="nb">cd </span>libzmq
+./autogen.sh <span class="o">&amp;&amp;</span> ./configure <span class="o">&amp;&amp;</span> make
+sudo make install
+sudo ldconfig
+</pre></div>
+
+<p>If your own platform has a package and I haven't included instructions for it, feel free to send me an email or a PR on this README.</p>
+
+<h2>
+<a name="haskell-and-cabal" class="anchor" href="#haskell-and-cabal"><span class="octicon octicon-link"></span></a>Haskell and Cabal</h2>
+
+<p>You should also have GHC and modern Cabal:</p>
+
+<div class="highlight highlight-bash"><pre>ghc --numeric-version <span class="c"># Should be 7.6.3</span>
+cabal --version       <span class="c"># Should be 1.18.*</span>
+</pre></div>
+
+<p>Since IHaskell uses the GHC API for evaluation and parsing, other versions of GHC may not work.</p>
+
+<p>If you do not have GHC or Cabal, you should be able to install both via the 
+<a href="http://www.haskell.org/platform/">Haskell Platform</a>. On Macs with Homebrew, you can do this via</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># Macs with Homebrew only, if you don't have GHC or Cabal</span>
+brew install haskell-platform
+cabal update <span class="o">&amp;&amp;</span> cabal install cabal-install
+</pre></div>
+
+<p>Use <code>cabal install cabal-install</code> to update Cabal if you still have version 1.16 instead of 1.18.</p>
+
+<p>Also, in order to use executables which <code>cabal</code> installs, they must be in your path. Execute this in your shell or add it to your <code>~/.bashrc</code>:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># If you have a ~/.cabal/bin folder:</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/.cabal/bin:<span class="nv">$PATH</span>
+
+<span class="c"># If you have a ~/Library/Haskell/bin folder on OS X:</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/Library/Haskell/bin:<span class="nv">$PATH</span>
+</pre></div>
+
+<h2>
+<a name="compilation-tools" class="anchor" href="#compilation-tools"><span class="octicon octicon-link"></span></a>Compilation Tools</h2>
+
+<p>Install the <code>happy</code> parser generator tool and <code>cpphs</code> preprocessor:</p>
+
+<div class="highlight highlight-bash"><pre>cabal install happy
+cabal install cpphs
+</pre></div>
+
+<h2>
+<a name="ihaskell-installation" class="anchor" href="#ihaskell-installation"><span class="octicon octicon-link"></span></a>IHaskell Installation</h2>
+
+<p>Install the IHaskell package from Hackage:</p>
+
+<div class="highlight highlight-bash"><pre>cabal install ihaskell
+</pre></div>
+
+<h2>
+<a name="running-ihaskell" class="anchor" href="#running-ihaskell"><span class="octicon octicon-link"></span></a>Running IHaskell</h2>
+
+<p>Finally, run the notebook or console interface:</p>
+
+<div class="highlight highlight-bash"><pre>IHaskell notebook <span class="c"># Should open a browser window!</span>
+IHaskell console
+</pre></div>
+
+<p>There is a test notebook in the <code>IHaskell</code> directory. To try it, run IHaskell with <code>IHaskell notebook --serve=IHaskell</code>.</p>
+
+<p><strong>Note</strong>: You may have some trouble due to browser caches with the notebook interface if you also use IPython's notebook interface or have used it in the past. If something doesn't work or IPython says it can't connect to the notebook server, make sure to clear the browser cache in whatever browser you're using, or try another browser.</p>
+
+<h1>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<p>IHaskell is a young project, and I'd love your help getting it to a stable and useful point. There's a lot to do, and if you'd like to contribute, feel free to get in touch with me via my email at andrew period gibiansky at gmail - although browsing the code should be enough to get you started, I'm more than happy to answer any questions myself.</p>
+
+<p><strong>For package maintainers:</strong> IHaskell has an ability to display data types it knows about with a rich format based on images or HTML. In order to do so, an external package <code>ihaskell-something</code> must be created and installed. Writing these packages is simply - they must just contain instance of the <code>IHaskellDisplay</code> typeclass, defined in <code>IHaskell.Display</code>, and for a package <code>ihaskell-something</code> should have a single module <code>IHaskell.Display.Something</code>. If you have a package with interesting data types that would benefit from a rich display format, please get in contact with me (andrew dot gibiansky at gmail) to write one of these packages! A sample package is available <a href="https://github.com/gibiansky/IHaskell-Display">here</a>.</p>
+
+<h2>
+<a name="developer-notes" class="anchor" href="#developer-notes"><span class="octicon octicon-link"></span></a>Developer Notes</h2>
+
+<p>Before diving in, you should read the <a href="http://andrew.gibiansky.com/blog/ipython/ipython-kernels/">brief description of IPython kernel architectures</a>
+and read the <a href="http://ipython.org/ipython-doc/dev/development/messaging.html">complete messaging protocol specification</a>.</p>
+
+<p>Skim the rather-lacking <a href="http://gibiansky.github.io/IHaskell/IHaskell/">Haddock documentation</a>.</p>
+
+<p>Module Quickstart: </p>
+
+<ul>
+<li>
+<code>Main</code>: Argument parsing and basic messaging loop, using Haskell Chans to communicate with the ZeroMQ sockets.</li>
+<li>
+<code>IHaskell.Types</code>: All message type definitions.</li>
+<li>
+<code>IHaskell.Eval.Evaluate</code>: Wrapper around GHC API, exposing a single <code>evaluate</code> interface that runs a statement, declaration, import, or directive.</li>
+<li>
+<code>IHaskell.IPython</code>: Shell scripting wrapper using <code>Shelly</code> for the <code>notebook</code>, <code>setup</code>, and <code>console</code> commands.</li>
+<li>
+<code>IHaskell.Message.Parser</code>: Parsing messages received from IPython.</li>
+<li>
+<code>IHaskell.Message.UUID</code>: UUID generator and data structure.</li>
+<li>
+<code>IHaskell.Message.Writer</code>: <code>ToJSON</code> for Messages.</li>
+<li>
+<code>IHaskell.ZeroMQ</code>: Low-level ZeroMQ communication wrapper. <code>serveProfile</code> starts listening on all necessary sockets, and returns a <code>ZeroMQInterface</code> record. This record exposes reading and writing <code>Chan Message</code> messages for all the necessary sockets, so then the rest of the application can simply use that interface.</li>
+</ul><p>First steps:</p>
+
+<ul>
+<li>Fork the repository on Github and clone your fork for editing. </li>
+<li>Build IHaskell as follows:</li>
+</ul><div class="highlight highlight-bash"><pre><span class="nb">cd</span> /path/to/IHaskell
+cabal configure --enable-tests
+cabal build
+</pre></div>
+
+<p><strong>Loading IHaskell into GHCi for testing:</strong></p>
+
+<p>Use one of the methods below to access IHaskell files in GHCi. Once inside GHCi, you can load an IHaskell file; for example, <code>:load IHaskell/Config.hs</code>.</p>
+
+<p><strong>Using cabal repl</strong></p>
+
+<p>If you have the latest version of cabal (&gt;v1.18.0), the simplest thing to do is </p>
+
+<div class="highlight highlight-bash"><pre><span class="nb">cd</span> &lt;path-to-IHaskell&gt;
+cabal repl
+</pre></div>
+
+<p>The will hide all packages not listed in the
+<code>IHaskell.cabal</code></p>
+
+<p><strong>Using GHCi directly</strong></p>
+
+<p>If you don't want to use cabal repl, you can just call ghci with the appropriate options. You can find these in the IHaskell.cabal file. </p>
+
+<div class="highlight highlight-bash"><pre>ghci -XDoAndIfThenElse -XNoImplicitPrelude -XOverloadedStrings -package ghc -optP-include -optPdist/build/autogen/cabal_macros.h
+</pre></div>
+
+<p>If you just call ghci, it will use the options present in the .ghci file that comes with the IHaskell repo. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">IHaskell: Haskell for IPython maintained by <a href="https://github.com/gibiansky">gibiansky</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40714888-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
