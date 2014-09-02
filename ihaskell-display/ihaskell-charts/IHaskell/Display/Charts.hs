@@ -33,9 +33,9 @@ chartData renderable format = do
   switchToTmpDir
 
   -- Write the PNG image.
-  let filename = ".ihaskell-chart.png"
+  let filename = ".ihaskell-chart.png" :: String
       opts = def{_fo_format = format, _fo_size = (width, height)}
-  renderableToFile opts renderable filename
+  renderableToFile opts filename renderable
 
   -- Convert to base64.
   imgData <- readFile $ fpFromString filename
