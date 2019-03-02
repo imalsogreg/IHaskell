@@ -1,5 +1,4 @@
-{ compiler ? "ghc802"
-, nixpkgs ? import <nixpkgs> {}
+{ nixpkgs
 , packages ? (_: [])
 , pythonPackages ? (_: [])
 , rtsopts ? "-M3g -N2"
@@ -28,7 +27,9 @@ let
     map
       (display: { name = "ihaskell-${display}"; value = self.callCabal2nix display "${ihaskell-display-src}/ihaskell-${display}" {}; })
       [ "aeson" "blaze" "charts" "diagrams" "gnuplot" "graphviz" "hatex" "juicypixels" "magic" "plot" "rlangqq" "static-canvas" "widgets" ]);
-  haskellPackages = nixpkgs.haskell.packages."${compiler}".extend (self: super: {
+  haskellPackages = nixpkgs.haskell.packages.ghc843.override
+   { overrides = self: super:
+    {
     ihaskell          = nixpkgs.haskell.lib.overrideCabal (
                         self.callCabal2nix "ihaskell" ihaskell-src {}) (_drv: {
       preCheck = ''
@@ -47,7 +48,8 @@ let
 
     static-canvas     = nixpkgs.haskell.lib.doJailbreak super.static-canvas;
     zeromq4-haskell   = nixpkgs.haskell.lib.dontCheck super.zeromq4-haskell;
-  } // displays self);
+   } // displays self;
+  };
   ihaskellEnv = haskellPackages.ghcWithPackages (self: [ self.ihaskell ] ++ packages self);
   jupyterlab = nixpkgs.python3.withPackages (ps: [ ps.jupyterlab ] ++ pythonPackages ps);
   ihaskellSh = cmd: extraArgs: nixpkgs.writeScriptBin "ihaskell-${cmd}" ''
