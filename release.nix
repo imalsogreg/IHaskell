@@ -47,6 +47,8 @@ let
     ghc-parser        = self.callCabal2nix "ghc-parser" ghc-parser-src {};
     ipython-kernel    = self.callCabal2nix "ipython-kernel" ipython-kernel-src {};
 
+    inline-r          = nixpkgs.haskell.lib.dontCheck super.inline-r;
+    ihaskell-inline-r = nixpkgs.haskell.lib.dontCheck super.ihaskell-inline-r;
     static-canvas     = nixpkgs.haskell.lib.doJailbreak super.static-canvas;
     zeromq4-haskell   = nixpkgs.haskell.lib.dontCheck super.zeromq4-haskell;
    } // displays self;
