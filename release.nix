@@ -1,4 +1,5 @@
-{ nixpkgs
+{ compiler ? "ghc843"
+, nixpkgs
 , packages ? (_: [])
 , pythonPackages ? (_: [])
 , rtsopts ? "-M3g -N2"
