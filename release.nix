@@ -30,7 +30,7 @@ let
       [ "aeson" "blaze" "charts" "diagrams" "gnuplot" "graphviz" "hatex" "juicypixels" "magic" "plot" "rlangqq" "static-canvas" "widgets" ]);
   baseHP = if isNull compiler
            then nixpkgs.haskellPackages
-           else nixpkgs.haskell.packages."${compiler}"
+           else nixpkgs.haskell.packages."${compiler}";
   haskellPackages = baseHP.override
    { overrides = self: super:
     {
