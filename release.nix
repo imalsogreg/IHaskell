@@ -28,7 +28,10 @@ let
     map
       (display: { name = "ihaskell-${display}"; value = self.callCabal2nix display "${ihaskell-display-src}/ihaskell-${display}" {}; })
       [ "aeson" "blaze" "charts" "diagrams" "gnuplot" "graphviz" "hatex" "juicypixels" "magic" "plot" "rlangqq" "static-canvas" "widgets" ]);
-  haskellPackages = nixpkgs.haskell.packages."${compiler}".override
+  baseHP = if isNull compiler
+           then nixpkgs.haskellPackages
+           else nixpkgs.haskell.packages."${compiler}"
+  haskellPackages = baseHP.override
    { overrides = self: super:
     {
     ihaskell          = nixpkgs.haskell.lib.overrideCabal (
